@@ -14,5 +14,27 @@
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    return [
+        'api' => 'hiuryzinho',
+        'version' => '0.1'
+    ];
+});
+
+$router->post('/api/login', 'Auth\Api\LoginController@login');
+
+$router->group(['middleware' => 'user_auth'], function () use ($router) {
+    $router->post('/api/logout', 'Auth\Api\LoginController@logout');
+});
+
+
+$router->post('/api/register', 'Auth\Api\RegisterController@register');
+
+$router->group(['prefix' => '/api', 'middleware' => 'user_auth'], function () use ($router)  {
+
+    $router->get('/alunos', 'AlunoController@index');
+    $router->get('/alunos/{id}', 'AlunoController@show');
+    $router->post('/alunos', 'AlunoController@store');
+    $router->post('/alunos/{id}', 'AlunoController@update');
+    $router->delete('/alunos/{id}', 'AlunoController@destroy');
+
 });
