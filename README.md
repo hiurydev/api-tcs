@@ -1,5 +1,5 @@
 # API - TCS
-coming son
+coming soon
 
 ## Official Documentation
-coming son
+coming soon
